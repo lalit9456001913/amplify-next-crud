@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { fetchUserData } from '../services/amplify.service';
-import { useRouter } from 'next/router';
-import { signOut } from 'aws-amplify/auth';
+import { useState, useEffect } from "react";
+import { fetchUserData } from "../services/amplify.service";
+import { useRouter } from "next/router";
+import { signOut } from "aws-amplify/auth";
 
 const ProfilePage = () => {
     const [user, setUser] = useState({});
@@ -15,7 +15,7 @@ const ProfilePage = () => {
                 console.log("userdata after fecthing---",userData)
                 setUser(userData?.data?.getUser);  
             } catch (error) {
-                setError('Error fetching user data');
+                setError("Error fetching user data");
                 console.error(error);
             }
         };
@@ -25,9 +25,9 @@ const ProfilePage = () => {
     const handleLogout = async () => {
         try {
             await signOut();
-            router.push('/');
+            router.push("/");
         } catch (err) {
-            setError('Error logging out');
+            setError("Error logging out");
         }
     };
 
@@ -35,13 +35,13 @@ const ProfilePage = () => {
         <div>
             {user ? (
                 <div>
-                    <h2>{user.firstName}'s Profile</h2>
+                    <h2>{user.firstName} Profile</h2>
                     <p>Email: {user.email}</p>
                     <p>Phone: {user.phone}</p>
                     <button onClick={handleLogout}>Logout</button>
                 </div>
             ) : (
-                <p>{error || 'Loading user profile...'}</p>
+                <p>{error || "Loading user profile..."}</p>
             )}
         </div>
     );
