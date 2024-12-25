@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Auth } from 'aws-amplify';
+import { confirmSignUp } from 'aws-amplify/auth';
 
 const VerifyOTP = ({ username }) => {
   const [otp, setOtp] = useState('');
@@ -7,7 +7,7 @@ const VerifyOTP = ({ username }) => {
 
   const handleVerifyOTP = async () => {
     try {
-      await Auth.confirmSignUp(username, otp); // Verifies the OTP with Cognito
+      await confirmSignUp(username, otp); // Verifies the OTP with Cognito
       alert('OTP Verified Successfully');
     } catch (err) {
       console.error('OTP verification error:', err);
