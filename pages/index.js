@@ -7,7 +7,7 @@ export default function Index() {
   const router=useRouter();
   useEffect(()=>{
     if(auth?.token){
-      router.push('/dashboard')
+      router.push('/profile')
     }else{
       router.push('/login')
     }
