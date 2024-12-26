@@ -36,7 +36,7 @@ const AuthPage = () => {
 
   const handleLogin = async (email, password) => {
     try {
-      await signIn(email, password); // Sign in with AWS Amplify
+      await signIn({ username: email, password });
       router.push('/profile');  // Redirect to profile page after successful login
     } catch (err) {
       console.error('Login error:', err);

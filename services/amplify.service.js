@@ -7,6 +7,7 @@ export const fetchUserData = async () => {
     try {
         const API = generateClient();
         const session = await fetchAuthSession();
+        console.log("session---", session)
         const userData = await API.graphql({
             query: getUser,
             variables: { id: session?.userSub }, // Pass the ID as a variable
@@ -41,6 +42,7 @@ export const createUsersData = async (body) => {
 
         const API = generateClient();
         const session = await fetchAuthSession();
+        console.log("session---", session)
         const currentUser = await getCurrentUser();
         console.log("users----", currentUser)
         const userData = await API.graphql({

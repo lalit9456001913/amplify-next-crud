@@ -12,8 +12,8 @@ const ProfilePage = () => {
         const fetchUser = async () => {
             try {
                 const userData = await fetchUserData();
-                console.log("userdata after fecthing---",userData)
-                setUser(userData?.data?.getUser);  
+                console.log("userdata after fecthing---", userData)
+                setUser(userData?.data?.getUser);
             } catch (error) {
                 setError("Error fetching user data");
                 console.error(error);
@@ -32,18 +32,21 @@ const ProfilePage = () => {
     };
 
     return (
-        <div>
-            {user ? (
-                <div>
-                    <h2>{user.firstName} Profile</h2>
-                    <p>Email: {user.email}</p>
-                    <p>Phone: {user.phone}</p>
-                    <button onClick={handleLogout}>Logout</button>
-                </div>
-            ) : (
-                <p>{error || "Loading user profile..."}</p>
-            )}
-        </div>
+        <>
+            <div>
+                {user ? (
+                    <div>
+                        <h2>{user.firstName} Profile</h2>
+                        <p>Email: {user.email}</p>
+                        <p>Phone: {user.phone}</p>
+                    </div>
+                ) : (
+                    <p>{error || "Loading user profile..."}</p>
+                )}
+            </div>
+            <button onClick={handleLogout}>Logout</button>
+        </>
+
     );
 };
 
