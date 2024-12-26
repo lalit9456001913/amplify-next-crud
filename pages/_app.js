@@ -1,4 +1,8 @@
 import '../styles/globals.css'; // Import global CSS here
+import { Amplify } from 'aws-amplify';
+import awsconfig from '../src/aws-exports'; 
+
+Amplify.configure(awsconfig);
 
 function MyApp({ Component, pageProps }) {
     return (

@@ -1,0 +1,12 @@
+{
+  "AppSyncApiName": "amplifycrud",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authamplifycrud9a69ba4e",
+      "Outputs.UserPoolId"
+    ]
+  },
+  "AuthModeLastUpdated": "2024-12-26T06:33:51.622Z"
+}
