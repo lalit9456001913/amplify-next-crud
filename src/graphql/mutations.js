@@ -78,7 +78,10 @@ export const createAddress = /* GraphQL */ `
     createAddress(input: $input, condition: $condition) {
       id
       house
+      street
       city
+      state
+      country
       pincode
       userID
       isActive
@@ -97,7 +100,10 @@ export const updateAddress = /* GraphQL */ `
     updateAddress(input: $input, condition: $condition) {
       id
       house
+      street
       city
+      state
+      country
       pincode
       userID
       isActive
@@ -116,7 +122,10 @@ export const deleteAddress = /* GraphQL */ `
     deleteAddress(input: $input, condition: $condition) {
       id
       house
+      street
       city
+      state
+      country
       pincode
       userID
       isActive

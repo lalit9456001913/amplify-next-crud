@@ -1,18 +1,31 @@
 import { useState } from 'react';
-import { confirmSignUp } from 'aws-amplify/auth';
+import { confirmSignUp, signIn } from 'aws-amplify/auth';
 import { useRouter } from 'next/router';
-const VerifyOTP = ({ username }) => {
-  console.log("username------", username)
+import { createUsersData } from '../services/amplify.service';
+import { fetchAuthSession } from '@aws-amplify/core';
+
+const VerifyOTP = ({ userDetails, setError }) => {
   const [otp, setOtp] = useState('');
-  const [error, setError] = useState('');
+  const [error, setOtpError] = useState('');
   const router = useRouter();
+
   const handleVerifyOTP = async () => {
     try {
-      await confirmSignUp({ username, confirmationCode: otp }); // Verifies the OTP with Cognito
+      await confirmSignUp({ username: userDetails.email, confirmationCode: otp });
+
       alert('OTP Verified Successfully');
-      router.push('/profile')
+
+      await signIn({ username: userDetails.email, password: userDetails.password });
+
+      const session = await fetchAuthSession();
+      const authToken = session?.tokens?.idToken?.toString();
+      delete userDetails.password;
+      await createUsersData(userDetails, authToken);
+      
+      router.push('/');
     } catch (err) {
       console.error('OTP verification error:', err);
+      setOtpError(err.message);
       setError(err.message);
     }
   };
@@ -27,7 +40,7 @@ const VerifyOTP = ({ username }) => {
         onChange={(e) => setOtp(e.target.value)}
       />
       <button onClick={handleVerifyOTP}>Verify OTP</button>
-      {error && <p>{error}</p>}
+      {error && <p>{otpError}</p>}
     </div>
   );
 };

@@ -78,7 +78,10 @@ export const onCreateAddress = /* GraphQL */ `
     onCreateAddress(filter: $filter, owner: $owner) {
       id
       house
+      street
       city
+      state
+      country
       pincode
       userID
       isActive
@@ -97,7 +100,10 @@ export const onUpdateAddress = /* GraphQL */ `
     onUpdateAddress(filter: $filter, owner: $owner) {
       id
       house
+      street
       city
+      state
+      country
       pincode
       userID
       isActive
@@ -116,7 +122,10 @@ export const onDeleteAddress = /* GraphQL */ `
     onDeleteAddress(filter: $filter, owner: $owner) {
       id
       house
+      street
       city
+      state
+      country
       pincode
       userID
       isActive

@@ -82,7 +82,10 @@ export const getAddress = /* GraphQL */ `
     getAddress(id: $id) {
       id
       house
+      street
       city
+      state
+      country
       pincode
       userID
       isActive
@@ -103,7 +106,10 @@ export const listAddresses = /* GraphQL */ `
       items {
         id
         house
+        street
         city
+        state
+        country
         pincode
         userID
         isActive
@@ -137,7 +143,10 @@ export const addressesByUserIDAndHouse = /* GraphQL */ `
       items {
         id
         house
+        street
         city
+        state
+        country
         pincode
         userID
         isActive

@@ -78,5 +78,12 @@
         }
       ]
     }
+  },
+  "storage": {
+    "amplifycrudstorage": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
+    }
   }
 }

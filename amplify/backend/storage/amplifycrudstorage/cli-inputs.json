@@ -1,0 +1,13 @@
+{
+  "resourceName": "amplifycrudstorage",
+  "policyUUID": "2766f0ad",
+  "bucketName": "amplifycrudbucket",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "groupAccess": {}
+}

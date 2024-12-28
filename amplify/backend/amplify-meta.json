@@ -39,12 +39,13 @@
         "GraphQLAPIKeyOutput": null,
         "GraphQLAPIIdOutput": "v5epsl6udvfkxdjcshnuubqoli"
       },
-      "lastPushTimeStamp": "2024-12-26T08:21:46.373Z",
+      "lastPushTimeStamp": "2024-12-27T09:16:29.055Z",
       "testMode": true,
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-amplifycrud-dev-92f86-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apiamplifycrud"
-      }
+      },
+      "lastPushDirHash": "p9HQIFdSs8gvVB83CHcOT0yaSy8="
     }
   },
   "function": {
@@ -53,7 +54,7 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
       "dependsOn": [],
-      "lastPushTimeStamp": "2024-12-26T08:21:46.380Z",
+      "lastPushTimeStamp": "2024-12-27T09:16:29.059Z",
       "output": {
         "LambdaExecutionRoleArn": "arn:aws:iam::131132981403:role/amplifycrudLambdaRole37f78d05-dev",
         "Region": "ap-south-1",
@@ -93,7 +94,7 @@
           "EMAIL"
         ]
       },
-      "lastPushTimeStamp": "2024-12-26T08:21:47.208Z",
+      "lastPushTimeStamp": "2024-12-27T09:16:29.063Z",
       "output": {
         "UserPoolId": "ap-south-1_aYKikm4hR",
         "AppClientIDWeb": "4l2t745gijlbf8mlfohg0ougbe",
@@ -108,6 +109,23 @@
         "logicalId": "authamplifycrud9a69ba4e"
       },
       "lastPushDirHash": "ILhOZvhWVQLer3fz2qI0xMPw6pc="
+    }
+  },
+  "storage": {
+    "amplifycrudstorage": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "lastPushTimeStamp": "2024-12-27T09:59:53.733Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-amplifycrud-dev-92f86-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
+        "logicalId": "storageamplifycrudstorage"
+      },
+      "output": {
+        "BucketName": "amplifycrudbucket92f86-dev",
+        "Region": "ap-south-1"
+      },
+      "lastPushDirHash": "aU1Lgyn/Xt7QgSKCnwEAH1sJEfk="
     }
   }
 }

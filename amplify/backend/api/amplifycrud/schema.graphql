@@ -10,7 +10,9 @@ type Query {
 
 type User
   @model
-  @auth(rules: [{ allow: owner, operations: [read, create, delete, update] }]) {
+  @auth(rules: [
+    { allow: owner, operations: [create, read, update, delete] }
+  ]) {
   id: ID!
   email: String!
   phone: String
@@ -20,6 +22,7 @@ type User
   addresses: [Address] @hasMany(indexName: "byUser", fields: ["id"])
 }
 
+
 type Address
   @model
   @auth(
@@ -27,7 +30,10 @@ type Address
   ) {
   id: ID!
   house: String
+  street: String
   city: String
+  state: String
+  country: String
   pincode: String
   userID: ID! @index(name: "byUser", sortKeyFields: ["house"])
   isActive: Boolean

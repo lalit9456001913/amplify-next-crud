@@ -96,10 +96,10 @@ export const customCreateUser = /* GraphQL */ `
   }
 `;
 
-// Mutation to update an existing user's details
+// Mutation to update an existing user details
 export const updateUser = /* GraphQL */ `
-  mutation UpdateUser($id: ID!, $email: String, $phone: String, $firstName: String, $lastName: String, $profilePhoto: String) {
-    updateUser(id: $id, input: { email: $email, phone: $phone, firstName: $firstName, lastName: $lastName, profilePhoto: $profilePhoto }) {
+  mutation UpdateUser($input: UpdateUserInput!) {
+    updateUser(input: $input) {
       id
       email
       phone
@@ -109,6 +109,9 @@ export const updateUser = /* GraphQL */ `
     }
   }
 `;
+
+
+
 
 // Mutation to delete a user
 export const deleteUser = /* GraphQL */ `

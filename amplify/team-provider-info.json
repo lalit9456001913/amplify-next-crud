@@ -23,6 +23,9 @@
       },
       "api": {
         "amplifycrud": {}
+      },
+      "storage": {
+        "amplifycrudstorage": {}
       }
     }
   }
