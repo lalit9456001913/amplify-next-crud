@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-
-const LocationForm = ({ onSave }) => {
+import { useEffect } from 'react';
+const LocationForm = ({ onSave, location }) => {
   const [locationData, setLocationData] = useState({
     locationName: '',
     house: '',
@@ -11,7 +11,6 @@ const LocationForm = ({ onSave }) => {
     pincode: ''
   });
 
-  // Hardcoded list of countries. You can replace this with a dynamic API call if needed.
   const countries = [
     { name: 'Select One', code: '' },
     { name: 'United States', code: 'US' },
@@ -29,30 +28,33 @@ const LocationForm = ({ onSave }) => {
     }));
   };
 
+  useEffect(() => {
+    if (location) {
+      setLocationData({
+        house: location?.house || '',  
+        street: location?.street || '',
+        city: location?.city || '',
+        state: location?.state || '',
+        country: location?.country || '',
+        pincode: location?.pincode || '',
+        isActive: location?.isActive !== undefined ? location.isActive : true,  
+      });
+    }
+  }, [location]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSave(locationData); // Save the location data
+    onSave(locationData); 
   };
 
   return (
     <div className="space-y-4">
       <div>
-        <input
-          type="text"
-          name="locationName"
-          value={locationData.locationName}
-          onChange={handleInputChange}
-          placeholder="Location Name"
-          className="w-full p-3 border rounded-md"
-        />
-      </div>
-
-      <div>
         <label className="block text-sm font-medium mb-1">House/Apt.</label>
         <input
           type="text"
           name="house"
-          value={locationData.house}
+          value={locationData?.house}
           onChange={handleInputChange}
           placeholder="Please input"
           className="w-full p-3 border rounded-md"
@@ -64,7 +66,7 @@ const LocationForm = ({ onSave }) => {
         <input
           type="text"
           name="street"
-          value={locationData.street}
+          value={locationData?.street}
           onChange={handleInputChange}
           placeholder="Please input"
           className="w-full p-3 border rounded-md"
@@ -77,7 +79,7 @@ const LocationForm = ({ onSave }) => {
           <input
             type="text"
             name="city"
-            value={locationData.city}
+            value={locationData?.city}
             onChange={handleInputChange}
             placeholder="Please input"
             className="w-full p-3 border rounded-md"
@@ -88,7 +90,7 @@ const LocationForm = ({ onSave }) => {
           <input
             type="text"
             name="state"
-            value={locationData.state}
+            value={locationData?.state}
             onChange={handleInputChange}
             placeholder="Please input"
             className="w-full p-3 border rounded-md"
@@ -101,7 +103,7 @@ const LocationForm = ({ onSave }) => {
           <label className="block text-sm font-medium mb-1">Country</label>
           <select
             name="country"
-            value={locationData.country}
+            value={locationData?.country}
             onChange={handleInputChange}
             className="w-full p-3 border rounded-md text-gray-500"
           >
@@ -117,7 +119,7 @@ const LocationForm = ({ onSave }) => {
           <input
             type="text"
             name="pincode"
-            value={locationData.pincode}
+            value={locationData?.pincode}
             onChange={handleInputChange}
             placeholder="Please input"
             className="w-full p-3 border rounded-md"

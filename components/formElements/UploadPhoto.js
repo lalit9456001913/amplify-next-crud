@@ -13,7 +13,7 @@ const UploadPhoto = ({ setProfilePhoto, profilePhoto }) => {
     const result = await uploadData({
       path,
       progressCallback(progress) {
-        setUploadProgress(Math.round((progress.loaded / progress.total) * 100)); // Update progress
+        setUploadProgress(Math.round((progress.loaded / progress.total) * 100)); 
       },
       data: file,
     }).result;

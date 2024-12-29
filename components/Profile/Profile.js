@@ -11,7 +11,6 @@ const Profile = ({ userProfile, userAddresses, handleProfile, handleEditClick, i
                     <div className="flex justify-between items-center">
                         <ProfileHeader userProfile={userProfile} />
                         <div className="flex gap-4">
-                            {/* Edit Profile Button */}
                             <button
                                 onClick={handleEditClick}
                                 className="bg-blue-500 text-white p-2 rounded-md mt-4 hover:bg-blue-600 transition-all duration-200"
@@ -19,7 +18,6 @@ const Profile = ({ userProfile, userAddresses, handleProfile, handleEditClick, i
                                 Edit Profile
                             </button>
 
-                            {/* Delete User Button */}
                             <button
                                 onClick={handleDeleteUser}
                                 className="bg-red-500 text-white p-2 rounded-md mt-4 hover:bg-red-600 transition-all duration-200"

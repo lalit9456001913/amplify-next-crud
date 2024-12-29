@@ -4,7 +4,6 @@ import { fetchAuthSession } from '@aws-amplify/core';
 import { getUser, listUsers, createUser, updateUser, deleteUser } from '../queries/user-query';
 import { createAddress, listAddressesByUser, updateAddress, deleteAddress } from '../queries/address-query';
 
-// Utility function to get session, current user, and API client
 const getSessionUserAndAPI = async () => {
     const session = await fetchAuthSession();
     if (!session) throw new Error("No session found");
@@ -17,7 +16,6 @@ const getSessionUserAndAPI = async () => {
     return { session, currentUser, API };
 };
 
-// Fetch user data
 export const fetchUserData = async () => {
     try {
         const { session, currentUser, API } = await getSessionUserAndAPI();
@@ -37,7 +35,6 @@ export const fetchUserData = async () => {
     }
 };
 
-// Fetch users data
 export const fetchUsersData = async () => {
     try {
         const { session, API } = await getSessionUserAndAPI();
@@ -55,7 +52,6 @@ export const fetchUsersData = async () => {
     }
 };
 
-// Create user data
 export const createUsersData = async (body) => {
     try {
         const { session, currentUser, API } = await getSessionUserAndAPI();
@@ -75,7 +71,6 @@ export const createUsersData = async (body) => {
     }
 };
 
-// Create user address
 export const createUsersAddress = async (body) => {
     try {
         const { session, currentUser, API } = await getSessionUserAndAPI();
@@ -106,7 +101,6 @@ export const createUsersAddress = async (body) => {
     }
 };
 
-// Get user addresses
 export const getUserAddresses = async () => {
     try {
         const { session, currentUser, API } = await getSessionUserAndAPI();
@@ -118,7 +112,6 @@ export const getUserAddresses = async () => {
             authToken: session.tokens.idToken.toString(),
         });
 
-        console.log("userAddresses----", userAddresses);
         return userAddresses?.data?.listAddresses?.items || [];
     } catch (error) {
         console.error("Error fetching user addresses:", error);
@@ -126,7 +119,6 @@ export const getUserAddresses = async () => {
     }
 };
 
-// Update user profile
 export const updateUserProfile = async (body) => {
     try {
         const { session, API } = await getSessionUserAndAPI();
@@ -155,11 +147,9 @@ export const updateUserProfile = async (body) => {
     }
 };
 
-// Update address by ID
 export const updateAddressById = async (addressId, body) => {
     try {
         const { session, API } = await getSessionUserAndAPI();
-
         const addressInput = {
             id: addressId,
             house: body.house,
@@ -171,7 +161,6 @@ export const updateAddressById = async (addressId, body) => {
             userID: body.userID,
             isActive: body.isActive,
         };
-
         const updatedAddress = await API.graphql({
             query: updateAddress,
             variables: addressInput,
@@ -214,10 +203,9 @@ export const deleteAddressById = async (addressId) => {
 
 export const deleteUserFromDatabase = async (userId) => {
     try {
-        
+
         const allAddresses = await getUserAddresses();
 
-        // Assuming the response contains a list of addresses:
         for (const address of allAddresses) {
             await deleteAddressById(address.id)
         }
@@ -225,7 +213,7 @@ export const deleteUserFromDatabase = async (userId) => {
         const { session, API } = await getSessionUserAndAPI();
 
         const response = await API.graphql({
-            query: deleteUser,  // Your mutation for deleting the user
+            query: deleteUser,  
             variables: { input: { id: userId } },
             authMode: 'AMAZON_COGNITO_USER_POOLS',
             authToken: session.tokens.idToken.toString(),

@@ -3,7 +3,7 @@
 
 const awsmobile = {
     "aws_project_region": "ap-south-1",
-    "aws_appsync_graphqlEndpoint": "https://6f2v2mnihjbzfcsijqg6oy2sda.appsync-api.ap-south-1.amazonaws.com/graphql",
+    "aws_appsync_graphqlEndpoint": "http://127.0.0.1:20002/graphql",
     "aws_appsync_region": "ap-south-1",
     "aws_appsync_authenticationType": "AMAZON_COGNITO_USER_POOLS",
     "aws_appsync_dangerously_connect_to_http_endpoint_for_testing": true,
@@ -30,9 +30,8 @@ const awsmobile = {
     "aws_cognito_verification_mechanisms": [
         "EMAIL"
     ],
-    "aws_user_files_s3_bucket": "amplifycrudbucket-dev",
-    "aws_user_files_s3_bucket_region": "ap-south-1",
-    "aws_user_files_s3_dangerously_connect_to_http_endpoint_for_testing": true
+    "aws_user_files_s3_bucket": "amplifycrudbucket92f86-dev",
+    "aws_user_files_s3_bucket_region": "ap-south-1"
 };
 
 

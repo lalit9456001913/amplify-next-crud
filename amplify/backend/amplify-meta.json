@@ -35,11 +35,11 @@
           },
           "additionalAuthenticationProviders": []
         },
-        "GraphQLAPIEndpointOutput": "https://6f2v2mnihjbzfcsijqg6oy2sda.appsync-api.ap-south-1.amazonaws.com/graphql",
+        "GraphQLAPIEndpointOutput": "http://127.0.0.1:20002/graphql",
         "GraphQLAPIKeyOutput": null,
         "GraphQLAPIIdOutput": "v5epsl6udvfkxdjcshnuubqoli"
       },
-      "lastPushTimeStamp": "2024-12-27T09:16:29.055Z",
+      "lastPushTimeStamp": "2024-12-29T10:53:49.571Z",
       "testMode": true,
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-amplifycrud-dev-92f86-deployment/amplify-cfn-templates/api/cloudformation-template.json",
@@ -118,17 +118,16 @@
       "service": "S3",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
-      "lastPushTimeStamp": "2024-12-29T09:36:12.637Z",
+      "lastPushTimeStamp": "2024-12-27T09:59:53.733Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-amplifycrud-dev-92f86-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
         "logicalId": "storageamplifycrudstorage"
       },
       "output": {
-        "BucketName": "amplifycrudbucket-dev",
+        "BucketName": "amplifycrudbucket92f86-dev",
         "Region": "ap-south-1"
       },
-      "lastPushDirHash": "aU1Lgyn/Xt7QgSKCnwEAH1sJEfk=",
-      "testMode": true
+      "lastPushDirHash": "aU1Lgyn/Xt7QgSKCnwEAH1sJEfk="
     }
   }
 }

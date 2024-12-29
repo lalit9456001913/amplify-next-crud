@@ -3,11 +3,10 @@ import { useRouter } from 'next/router';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
 import { signUp, signIn } from 'aws-amplify/auth';
-import { createUsersData } from '../services/amplify.service';
 import VerifyOTP from './VerifyOtp';
 
 const AuthPage = () => {
-  const [isSignUp, setIsSignUp] = useState(false); // Toggling between sign-up and login
+  const [isSignUp, setIsSignUp] = useState(false); 
   const [isOtp, setIsOtp] = useState(false);
   const [error, setError] = useState('');
   const [userDetails, setUserDetails] = useState('');

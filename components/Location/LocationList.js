@@ -1,22 +1,39 @@
 import React, { useState } from 'react';
 import LocationForm from './LocationForm';
-import { createUsersAddress, updateAddressById, deleteAddressById } from '../../services/amplify.service'; // Add your delete function in amplify service
+import { createUsersAddress, updateAddressById, deleteAddressById } from '../../services/amplify.service';
 
 const LocationList = ({ locations, setLocations }) => {
   const [showLocationForm, setShowLocationForm] = useState(false);
-  const [error, setError] = useState(null);  // Error state to track any errors
+  const [currentLocation, setCurrentLocation] = useState(null);
+  const [error, setError] = useState(null);
 
   const handleAddLocation = async (location) => {
     try {
-      const response = await createUsersAddress(location);
-      if (response.data) {
-        setLocations((prevLocations) => [...prevLocations, response?.data?.createAddress]);
-        setShowLocationForm(false);
+      if (currentLocation) {
+        const response = await updateAddressById(currentLocation.id, { ...location, userID: currentLocation.userID });
+        if (response.data) {
+          setLocations((prevLocations) =>
+            prevLocations.map((loc) =>
+              loc.id === currentLocation.id ? { ...location, userID: currentLocation.userID, id: currentLocation.id } : loc
+            )
+          );
+          setShowLocationForm(false);
+          setCurrentLocation(null);
+          setError(null);
+        } else {
+          setError("Failed to update location. Please try again.");
+        }
       } else {
-        setError("Failed to create location. Please try again.");
+        const response = await createUsersAddress(location);
+        if (response.data) {
+          setLocations((prevLocations) => [...prevLocations, response?.data?.createAddress]);
+          setShowLocationForm(false);
+        } else {
+          setError("Failed to create location. Please try again.");
+        }
       }
     } catch (err) {
-      setError("Error crseating location: " + err.message);
+      setError("Error processing location: " + err.message);
       console.error(err);
     }
   };
@@ -49,46 +66,57 @@ const LocationList = ({ locations, setLocations }) => {
     }
   };
 
+  const handleEditLocation = async (location) => {
+    setCurrentLocation(location); 
+    setShowLocationForm(true);  
+  };
+
   return (
     <div className="mb-6">
-      {/* Button to toggle showing the LocationForm */}
       <button
-        onClick={() => setShowLocationForm(!showLocationForm)}
+        onClick={() => {
+          setShowLocationForm(!showLocationForm)
+        }}
         className="flex items-center gap-2 text-sm font-medium mb-4"
       >
         <span className="text-xl">+</span> Add Location
       </button>
 
-      {/* Render the LocationForm if showLocationForm is true */}
-      {showLocationForm && <LocationForm onSave={handleAddLocation} />}
+      {showLocationForm && <LocationForm onSave={handleAddLocation} location={currentLocation} />}
 
-      {/* Display error message if there's any */}
       {error && (
         <div className="text-red-500 bg-red-100 border border-red-500 p-3 rounded mb-4">
           <strong>Error: </strong> {error}
         </div>
       )}
 
-      {/* List the locations */}
       {locations.map((location, index) => (
         <div key={index} className="flex items-center justify-between mt-3">
           <div className="flex items-center gap-2">
             <input
               type="checkbox"
               className="w-4 h-4"
-              checked={location.isActive || false}  // Check if the location is active or not
-              onChange={(e) => handleCheckboxChange(e, index)}  // Handle checkbox state change
+              checked={location.isActive || false}  
+              onChange={(e) => handleCheckboxChange(e, index)}  
             />
             <span className="text-gray-500">{location.house}</span>
           </div>
 
-          {/* Delete Button */}
-          <button
-            onClick={() => handleDeleteLocation(location.id)}
-            className="text-red-500 hover:text-red-700 transition-all duration-300 ease-in-out"
-          >
-            <span className="text-xl">&times;</span> {/* The delete icon (×) */}
-          </button>
+          <div className="flex gap-2">
+            <button
+              onClick={() => handleEditLocation(location)}
+              className="text-blue-500 hover:text-blue-700 transition-all duration-300 ease-in-out"
+            >
+              <span className="text-xl">✏️</span> 
+            </button>
+
+            <button
+              onClick={() => handleDeleteLocation(location.id)}
+              className="text-red-500 hover:text-red-700 transition-all duration-300 ease-in-out"
+            >
+              <span className="text-xl">&times;</span> 
+            </button>
+          </div>
         </div>
       ))}
     </div>
