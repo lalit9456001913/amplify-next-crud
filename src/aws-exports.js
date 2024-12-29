@@ -31,7 +31,7 @@ const awsmobile = {
         "EMAIL"
     ],
     "aws_user_files_s3_bucket": process.env.NEXT_PUBLIC_AWS_USER_FILES_S3_BUCKET,
-    "aws_user_files_s3_bucket_region": NEXT_PUBLIC_AWS_USER_FILES_S3_BUCKET_REGION
+    "aws_user_files_s3_bucket_region": process.env.NEXT_PUBLIC_AWS_USER_FILES_S3_BUCKET_REGION
 };
 
 
