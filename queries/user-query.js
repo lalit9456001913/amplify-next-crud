@@ -111,12 +111,12 @@ export const updateUser = /* GraphQL */ `
 `;
 
 
-
-
-// Mutation to delete a user
 export const deleteUser = /* GraphQL */ `
-  mutation DeleteUser($id: ID!) {
-    deleteUser(id: $id) {
+  mutation DeleteUser(
+    $input: DeleteUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    deleteUser(input: $input, condition: $condition) {
       id
       email
       phone
@@ -126,6 +126,7 @@ export const deleteUser = /* GraphQL */ `
     }
   }
 `;
+
 
 // graphql/queries.js
 

@@ -65,7 +65,9 @@
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-amplifycrud-dev-92f86-deployment/amplify-cfn-templates/function/lambdafuntion-cloudformation-template.json",
         "logicalId": "functionlambdafuntion"
-      }
+      },
+      "lastDevBuildTimeStamp": "2024-12-29T09:32:48.159Z",
+      "lastBuildType": "DEV"
     }
   },
   "auth": {
@@ -116,16 +118,17 @@
       "service": "S3",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
-      "lastPushTimeStamp": "2024-12-27T09:59:53.733Z",
+      "lastPushTimeStamp": "2024-12-29T09:36:12.637Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-amplifycrud-dev-92f86-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
         "logicalId": "storageamplifycrudstorage"
       },
       "output": {
-        "BucketName": "amplifycrudbucket92f86-dev",
+        "BucketName": "amplifycrudbucket-dev",
         "Region": "ap-south-1"
       },
-      "lastPushDirHash": "aU1Lgyn/Xt7QgSKCnwEAH1sJEfk="
+      "lastPushDirHash": "aU1Lgyn/Xt7QgSKCnwEAH1sJEfk=",
+      "testMode": true
     }
   }
 }

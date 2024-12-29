@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Profile from "../components/Profile/Profile";
 import Header from "../components/Header";
-import { fetchUserData, getUserAddresses, updateUserProfile } from '../services/amplify.service';
-import { getCurrentUser } from 'aws-amplify/auth';
+import { fetchUserData, getUserAddresses, updateUserProfile, deleteUserFromDatabase } from '../services/amplify.service';
+import { getCurrentUser, signOut,deleteUser } from 'aws-amplify/auth';
 
 export default function Index() {
   const [userProfileData, setUserProfileData] = useState(null);
@@ -24,16 +24,33 @@ export default function Index() {
 
     if (response.data) {
       fetchUserDataAndAddresses();
-      setIsEditing(false)
+      setIsEditing(false);
     } else {
-      setError('Error updating user profile')
+      setError('Error updating user profile');
     }
   };
 
   const handleEditClick = () => {
-    setIsEditing(!isEditing); 
+    setIsEditing(!isEditing);
   };
 
+  const handleDeleteUser = async () => {
+    try {
+      const confirmation = window.confirm("Are you sure you want to delete your account? This action cannot be undone.");
+      if (!confirmation) return;
+
+      await deleteUserFromDatabase(userProfileData.id);  
+
+      await deleteUser(userProfileData.id);
+
+      await signOut();
+
+      router.push('/auth');
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      setError("There was an error deleting your account.");
+    }
+  };
 
   const checkIfLoggedIn = async () => {
     try {
@@ -82,6 +99,7 @@ export default function Index() {
 
       {userProfileData && (
         <Profile
+          handleDeleteUser={handleDeleteUser}
           isEditing={isEditing}
           handleEditClick={handleEditClick}
           userProfile={userProfileData}

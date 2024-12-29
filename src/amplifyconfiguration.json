@@ -27,6 +27,7 @@
   "aws_cognito_verification_mechanisms": [
     "EMAIL"
   ],
-  "aws_user_files_s3_bucket": "amplifycrudbucket92f86-dev",
-  "aws_user_files_s3_bucket_region": "ap-south-1"
+  "aws_user_files_s3_bucket": "amplifycrudbucket-dev",
+  "aws_user_files_s3_bucket_region": "ap-south-1",
+  "aws_user_files_s3_dangerously_connect_to_http_endpoint_for_testing": true
 }

@@ -1,7 +1,7 @@
 import { generateClient } from 'aws-amplify/api';
 import { getCurrentUser } from 'aws-amplify/auth';
 import { fetchAuthSession } from '@aws-amplify/core';
-import { getUser, listUsers, createUser, updateUser } from '../queries/user-query';
+import { getUser, listUsers, createUser, updateUser, deleteUser } from '../queries/user-query';
 import { createAddress, listAddressesByUser, updateAddress, deleteAddress } from '../queries/address-query';
 
 // Utility function to get session, current user, and API client
@@ -193,13 +193,13 @@ export const deleteAddressById = async (addressId) => {
         const { session, API } = await getSessionUserAndAPI();
         const input = { id: addressId };
 
-        const condition = null;  
+        const condition = null;
 
         const response = await API.graphql({
-            query: deleteAddress, 
+            query: deleteAddress,
             variables: {
-                input, 
-                condition  
+                input,
+                condition
             },
             authMode: 'AMAZON_COGNITO_USER_POOLS',
             authToken: session.tokens.idToken.toString(),
@@ -208,5 +208,32 @@ export const deleteAddressById = async (addressId) => {
     } catch (error) {
         console.error("Error deleting address:", error);
         throw new Error('Error deleting address');
+    }
+};
+
+
+export const deleteUserFromDatabase = async (userId) => {
+    try {
+        
+        const allAddresses = await getUserAddresses();
+
+        // Assuming the response contains a list of addresses:
+        for (const address of allAddresses) {
+            await deleteAddressById(address.id)
+        }
+
+        const { session, API } = await getSessionUserAndAPI();
+
+        const response = await API.graphql({
+            query: deleteUser,  // Your mutation for deleting the user
+            variables: { input: { id: userId } },
+            authMode: 'AMAZON_COGNITO_USER_POOLS',
+            authToken: session.tokens.idToken.toString(),
+        });
+
+        return response;
+    } catch (error) {
+        console.error("Error deleting user:", error);
+        throw new Error('Error deleting user');
     }
 };
