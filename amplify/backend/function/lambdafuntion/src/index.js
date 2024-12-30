@@ -12,5 +12,5 @@ exports.handler = async (event) => {
     };
   
     // Return the result back to AppSync
-    return [user];
+    return user;
 };
