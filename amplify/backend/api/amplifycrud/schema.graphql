@@ -1,5 +1,5 @@
 type Query {
-  fetchUsersByCriteria(
+  lamdaTesting(
     email: String
     phone: String
     firstName: String

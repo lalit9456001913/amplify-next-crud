@@ -1,15 +1,15 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const fetchUsersByCriteria = /* GraphQL */ `
-  query FetchUsersByCriteria(
+export const lamdaTesting = /* GraphQL */ `
+  query LamdaTesting(
     $email: String
     $phone: String
     $firstName: String
     $lastName: String
     $profilePhoto: String
   ) {
-    fetchUsersByCriteria(
+    lamdaTesting(
       email: $email
       phone: $phone
       firstName: $firstName
